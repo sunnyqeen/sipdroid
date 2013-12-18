@@ -313,10 +313,15 @@ import org.zoolu.sip.provider.SipProvider;
 						break;
 		        	default:
 		        		if (type >= REGISTER_NOTIFICATION && mSipdroidEngine != null && type != REGISTER_NOTIFICATION+mSipdroidEngine.pref &&
-		        				mInCallResId == R.drawable.sym_presence_available)
-							notification.contentIntent = PendingIntent.getActivity(mContext, 0,
-						            createIntent(ChangeAccount.class), 0);
-		        		else
+		        				mInCallResId == R.drawable.sym_presence_available) {
+							int key = type - REGISTER_NOTIFICATION;
+							Intent in = createIntent(ChangeAccount.class);
+							in.setAction(Long.toString(type));
+							in.putExtra(ChangeAccount.ChangeAccountKey, key);
+							in.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+							notification.contentIntent = PendingIntent.getActivity(mContext, key,
+						            in, PendingIntent.FLAG_UPDATE_CURRENT);
+		        		}else
 		        			notification.contentIntent = PendingIntent.getActivity(mContext, 0,
 		        					createIntent(Sipdroid.class), 0);
 				        if (mInCallResId == R.drawable.sym_presence_away) {

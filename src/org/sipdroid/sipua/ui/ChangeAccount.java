@@ -22,12 +22,15 @@ package org.sipdroid.sipua.ui;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 
 public class ChangeAccount extends Activity {
 
+	public static final String ChangeAccountKey = "ChangeAccount_Key";
+	
 	public static int getPref(Context context) {
 		return PreferenceManager.getDefaultSharedPreferences(context).getInt(Settings.PREF_ACCOUNT, Settings.DEFAULT_ACCOUNT);
 	}
@@ -35,11 +38,20 @@ public class ChangeAccount extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		Editor edit = PreferenceManager.getDefaultSharedPreferences(this).edit();
 		
-		edit.putInt(Settings.PREF_ACCOUNT, Receiver.engine(this).pref = 1-getPref(this));
-		edit.commit();
-		Receiver.engine(this).register();
+		int key = -1;
+		Bundle extras = getIntent().getExtras();
+		if (extras != null) {
+			key = extras.getInt(ChangeAccountKey, -1);
+		}
+		
+		if(key != -1) {
+			Editor edit = PreferenceManager.getDefaultSharedPreferences(this).edit();
+		
+			edit.putInt(Settings.PREF_ACCOUNT, Receiver.engine(this).pref = key);
+			edit.commit();
+			Receiver.engine(this).register();
+		}
 		finish();
 	}
 }

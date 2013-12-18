@@ -1,0 +1,270 @@
+<PreferenceScreen
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:key="accounts"
+	android:title="@string/settings_account">
+		<PreferenceScreen android:title="@string/settings_account"
+					android:key="account">
+			<EditTextPreference
+				android:key="username"
+				android:title="@string/settings_username"
+				android:singleLine="true" />
+			<EditTextPreference
+				android:key="password"
+				android:title="@string/settings_password"
+				android:password="true"
+				android:singleLine="true" />
+			<EditTextPreference
+				android:key="server"
+				android:title="@string/settings_server"
+				android:singleLine="true" />
+			<EditTextPreference
+				android:key="domain"
+				android:title="@string/settings_domain"
+				android:summary="@string/settings_domain2"
+				android:singleLine="true" />
+			<EditTextPreference android:singleLine="true"
+				android:title="@string/settings_username1"
+				android:key="fromuser"
+				android:summary="@string/settings_callerid2">
+			</EditTextPreference>
+			<ListPreference
+				android:key="port"
+				android:title="@string/settings_port"
+				android:entries="@array/port_display_values2"
+				android:entryValues="@array/port_values2"
+				android:dialogTitle="@string/settings_port" />
+			<ListPreference
+				android:key="protocol"
+				android:title="@string/settings_protocol"
+				android:entries="@array/protocol_display_values2"
+				android:entryValues="@array/protocol_values2"
+				android:dialogTitle="@string/settings_protocol" />
+			<CheckBoxPreference
+				android:key="wlan"
+				android:title="@string/settings_wlan"/>
+			<CheckBoxPreference
+				android:key="3g"
+				android:title="@string/settings_3g"
+				android:summary="@string/settings_check" />
+			<CheckBoxPreference
+				android:key="edge"
+				android:title="@string/settings_edge"
+				android:summary="@string/settings_check" />
+			<CheckBoxPreference
+				android:key="vpn"
+				android:title="@string/settings_vpn"
+				android:summary="@string/settings_vpn2" />
+	</PreferenceScreen>
+	<PreferenceScreen android:title="@string/settings_account"
+				android:key="account1">
+			<EditTextPreference
+				android:key="username1"
+				android:title="@string/settings_username"
+				android:singleLine="true" />
+			<EditTextPreference
+				android:key="password1"
+				android:title="@string/settings_password"
+				android:password="true"
+				android:singleLine="true" />
+			<EditTextPreference
+				android:key="server1"
+				android:title="@string/settings_server"
+				android:singleLine="true" />
+			<EditTextPreference
+				android:key="domain1"
+				android:title="@string/settings_domain"
+				android:summary="@string/settings_domain2"
+				android:singleLine="true" />
+			<EditTextPreference android:singleLine="true"
+				android:title="@string/settings_username1"
+				android:key="fromuser1"
+				android:summary="@string/settings_callerid2">
+			</EditTextPreference>
+			<ListPreference
+				android:key="port1"
+				android:title="@string/settings_port"
+				android:entries="@array/port_display_values2"
+				android:entryValues="@array/port_values2"
+				android:dialogTitle="@string/settings_port" />
+			<ListPreference
+				android:key="protocol1"
+				android:title="@string/settings_protocol"
+				android:entries="@array/protocol_display_values2"
+				android:entryValues="@array/protocol_values2"
+				android:dialogTitle="@string/settings_protocol" />
+			<CheckBoxPreference
+				android:key="wlan1"
+				android:title="@string/settings_wlan"/>
+			<CheckBoxPreference
+				android:key="3g1"
+				android:title="@string/settings_3g"
+				android:summary="@string/settings_check" />
+			<CheckBoxPreference
+				android:key="edge1"
+				android:title="@string/settings_edge"
+				android:summary="@string/settings_check" />
+			<CheckBoxPreference
+				android:key="vpn1"
+				android:title="@string/settings_vpn"
+				android:summary="@string/settings_vpn2" />
+	</PreferenceScreen>
+	<PreferenceScreen android:title="@string/settings_account"
+				android:key="account2">
+			<EditTextPreference
+				android:key="username2"
+				android:title="@string/settings_username"
+				android:singleLine="true" />
+			<EditTextPreference
+				android:key="password2"
+				android:title="@string/settings_password"
+				android:password="true"
+				android:singleLine="true" />
+			<EditTextPreference
+				android:key="server2"
+				android:title="@string/settings_server"
+				android:singleLine="true" />
+			<EditTextPreference
+				android:key="domain2"
+				android:title="@string/settings_domain"
+				android:summary="@string/settings_domain2"
+				android:singleLine="true" />
+			<EditTextPreference android:singleLine="true"
+				android:title="@string/settings_username1"
+				android:key="fromuser2"
+				android:summary="@string/settings_callerid2">
+			</EditTextPreference>
+			<ListPreference
+				android:key="port2"
+				android:title="@string/settings_port"
+				android:entries="@array/port_display_values2"
+				android:entryValues="@array/port_values2"
+				android:dialogTitle="@string/settings_port" />
+			<ListPreference
+				android:key="protocol2"
+				android:title="@string/settings_protocol"
+				android:entries="@array/protocol_display_values2"
+				android:entryValues="@array/protocol_values2"
+				android:dialogTitle="@string/settings_protocol" />
+			<CheckBoxPreference
+				android:key="wlan2"
+				android:title="@string/settings_wlan"/>
+			<CheckBoxPreference
+				android:key="3g2"
+				android:title="@string/settings_3g"
+				android:summary="@string/settings_check" />
+			<CheckBoxPreference
+				android:key="edge2"
+				android:title="@string/settings_edge"
+				android:summary="@string/settings_check" />
+			<CheckBoxPreference
+				android:key="vpn2"
+				android:title="@string/settings_vpn"
+				android:summary="@string/settings_vpn2" />
+	</PreferenceScreen>
+	<PreferenceScreen android:title="@string/settings_account"
+				android:key="account3">
+			<EditTextPreference
+				android:key="username3"
+				android:title="@string/settings_username"
+				android:singleLine="true" />
+			<EditTextPreference
+				android:key="password3"
+				android:title="@string/settings_password"
+				android:password="true"
+				android:singleLine="true" />
+			<EditTextPreference
+				android:key="server3"
+				android:title="@string/settings_server"
+				android:singleLine="true" />
+			<EditTextPreference
+				android:key="domain3"
+				android:title="@string/settings_domain"
+				android:summary="@string/settings_domain2"
+				android:singleLine="true" />
+			<EditTextPreference android:singleLine="true"
+				android:title="@string/settings_username1"
+				android:key="fromuser3"
+				android:summary="@string/settings_callerid2">
+			</EditTextPreference>
+			<ListPreference
+				android:key="port3"
+				android:title="@string/settings_port"
+				android:entries="@array/port_display_values2"
+				android:entryValues="@array/port_values2"
+				android:dialogTitle="@string/settings_port" />
+			<ListPreference
+				android:key="protocol3"
+				android:title="@string/settings_protocol"
+				android:entries="@array/protocol_display_values2"
+				android:entryValues="@array/protocol_values2"
+				android:dialogTitle="@string/settings_protocol" />
+			<CheckBoxPreference
+				android:key="wlan3"
+				android:title="@string/settings_wlan"/>
+			<CheckBoxPreference
+				android:key="3g3"
+				android:title="@string/settings_3g"
+				android:summary="@string/settings_check" />
+			<CheckBoxPreference
+				android:key="edge3"
+				android:title="@string/settings_edge"
+				android:summary="@string/settings_check" />
+			<CheckBoxPreference
+				android:key="vpn3"
+				android:title="@string/settings_vpn"
+				android:summary="@string/settings_vpn2" />
+	</PreferenceScreen>
+	<PreferenceScreen android:title="@string/settings_account"
+				android:key="account4">
+			<EditTextPreference
+				android:key="username4"
+				android:title="@string/settings_username"
+				android:singleLine="true" />
+			<EditTextPreference
+				android:key="password4"
+				android:title="@string/settings_password"
+				android:password="true"
+				android:singleLine="true" />
+			<EditTextPreference
+				android:key="server4"
+				android:title="@string/settings_server"
+				android:singleLine="true" />
+			<EditTextPreference
+				android:key="domain4"
+				android:title="@string/settings_domain"
+				android:summary="@string/settings_domain2"
+				android:singleLine="true" />
+			<EditTextPreference android:singleLine="true"
+				android:title="@string/settings_username1"
+				android:key="fromuser4"
+				android:summary="@string/settings_callerid2">
+			</EditTextPreference>
+			<ListPreference
+				android:key="port4"
+				android:title="@string/settings_port"
+				android:entries="@array/port_display_values2"
+				android:entryValues="@array/port_values2"
+				android:dialogTitle="@string/settings_port" />
+			<ListPreference
+				android:key="protocol4"
+				android:title="@string/settings_protocol"
+				android:entries="@array/protocol_display_values2"
+				android:entryValues="@array/protocol_values2"
+				android:dialogTitle="@string/settings_protocol" />
+			<CheckBoxPreference
+				android:key="wlan4"
+				android:title="@string/settings_wlan"/>
+			<CheckBoxPreference
+				android:key="3g4"
+				android:title="@string/settings_3g"
+				android:summary="@string/settings_check" />
+			<CheckBoxPreference
+				android:key="edge4"
+				android:title="@string/settings_edge"
+				android:summary="@string/settings_check" />
+			<CheckBoxPreference
+				android:key="vpn4"
+				android:title="@string/settings_vpn"
+				android:summary="@string/settings_vpn2" />
+	</PreferenceScreen>
+</PreferenceScreen>

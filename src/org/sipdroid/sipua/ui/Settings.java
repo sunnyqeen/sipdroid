@@ -278,7 +278,7 @@ public class Settings extends PreferenceActivity implements OnSharedPreferenceCh
 	private void setDefaultValues() {
 		settings = getSharedPreferences(sharedPrefsFile, MODE_PRIVATE);
 
-		for (int i = 0; i < SipdroidEngine.LINES; i++) {
+		/*for (int i = 0; i < SipdroidEngine.LINES; i++) {
 			String j = (i!=0?""+i:"");
 			if (settings.getString(PREF_SERVER+j, "").equals("")) {
 				CheckBoxPreference cb = (CheckBoxPreference) getPreferenceScreen().findPreference(PREF_WLAN+j);
@@ -293,7 +293,7 @@ public class Settings extends PreferenceActivity implements OnSharedPreferenceCh
 	        	Receiver.engine(this).updateDNS();
 	        	reload();
 			}
-		}
+		}*/
 		if (settings.getString(PREF_STUN_SERVER, "").equals("")) {
 			Editor edit = settings.edit();
 
@@ -491,7 +491,7 @@ public class Settings extends PreferenceActivity implements OnSharedPreferenceCh
     	if (!Thread.currentThread().getName().equals("main"))
     		return;
 		if (key.startsWith(PREF_PORT) && sharedPreferences.getString(key, DEFAULT_PORT).equals("0")) {
-	   		Editor edit = sharedPreferences.edit();
+	   		/*Editor edit = sharedPreferences.edit();
     		edit.putString(key, DEFAULT_PORT);
     		edit.commit();
 
@@ -504,9 +504,9 @@ public class Settings extends PreferenceActivity implements OnSharedPreferenceCh
 			.setView(transferText)
 			.setPositiveButton(android.R.string.ok, this)
 			.show();
-			return;
+			return;*/
 		} else if (key.startsWith(PREF_SERVER) || key.startsWith(PREF_PROTOCOL)) {
-    		Editor edit = sharedPreferences.edit();
+    		/*Editor edit = sharedPreferences.edit();
     		for (int i = 0; i < SipdroidEngine.LINES; i++) {
     			edit.putString(PREF_DNS+i, DEFAULT_DNS);
     			String j = (i!=0?""+i:"");
@@ -528,28 +528,28 @@ public class Settings extends PreferenceActivity implements OnSharedPreferenceCh
     		}
     		edit.commit();
         	Receiver.engine(this).updateDNS();
-        	Checkin.checkin(false);
+        	Checkin.checkin(false);*/
         } else if (sharedPreferences.getBoolean(PREF_CALLBACK, DEFAULT_CALLBACK) && sharedPreferences.getBoolean(PREF_CALLTHRU, DEFAULT_CALLTHRU)) {
     		CheckBoxPreference cb = (CheckBoxPreference) getPreferenceScreen().findPreference(key.equals(PREF_CALLBACK) ? PREF_CALLTHRU : PREF_CALLBACK);
     		cb.setChecked(false);
-	    } else if (key.startsWith(PREF_WLAN) ||
+	    } else if (/*key.startsWith(PREF_WLAN) ||
         			key.startsWith(PREF_3G) ||
         			key.startsWith(PREF_EDGE) ||
         			key.startsWith(PREF_USERNAME) ||
         			key.startsWith(PREF_PASSWORD) ||
         			key.startsWith(PREF_DOMAIN) ||
         			key.startsWith(PREF_SERVER) ||
-        			key.startsWith(PREF_PORT) ||
+        			key.startsWith(PREF_PORT) ||*/
         			key.equals(PREF_STUN) ||
         			key.equals(PREF_STUN_SERVER) ||
         			key.equals(PREF_STUN_SERVER_PORT) ||
         			key.equals(PREF_MMTEL) ||			// (added by mandrajg)
         			key.equals(PREF_MMTEL_QVALUE) ||	// (added by mandrajg)
-        			key.startsWith(PREF_PROTOCOL) ||
-        			key.startsWith(PREF_VPN) ||
+        			/*key.startsWith(PREF_PROTOCOL) ||
+        			key.startsWith(PREF_VPN) ||*/
         			key.equals(PREF_POS) ||
         			key.equals(PREF_POSURL) ||
-        			key.startsWith(PREF_FROMUSER) ||
+        			/*key.startsWith(PREF_FROMUSER) ||*/
         			key.equals(PREF_AUTO_ONDEMAND) ||
         			key.equals(PREF_MWI_ENABLED) ||
         			key.equals(PREF_REGISTRATION) ||
@@ -575,7 +575,7 @@ public class Settings extends PreferenceActivity implements OnSharedPreferenceCh
        	// MMTel settings (added by mandrajg)
        	getPreferenceScreen().findPreference(PREF_MMTEL_QVALUE).setSummary(settings.getString(PREF_MMTEL_QVALUE, DEFAULT_MMTEL_QVALUE));	
     	
-       	for (int i = 0; i < SipdroidEngine.LINES; i++) {
+       	/*for (int i = 0; i < SipdroidEngine.LINES; i++) {
        		String j = (i!=0?""+i:"");
        		String username = settings.getString(PREF_USERNAME+j, DEFAULT_USERNAME),
        			server = settings.getString(PREF_SERVER+j, DEFAULT_SERVER);
@@ -595,7 +595,7 @@ public class Settings extends PreferenceActivity implements OnSharedPreferenceCh
 	    	getPreferenceScreen().findPreference(PREF_PROTOCOL+j).setSummary(settings.getString(PREF_PROTOCOL+j,
 	    		settings.getString(PREF_SERVER+j, DEFAULT_SERVER).equals(DEFAULT_SERVER) ? "tcp" : "udp").toUpperCase());
 	    	getPreferenceScreen().findPreference(PREF_ACCOUNT+j).setSummary(username.equals("")||server.equals("")?getResources().getString(R.string.settings_line)+" "+(i+1):username+"@"+server);
-       	}
+       	}*/
        	
     	getPreferenceScreen().findPreference(PREF_SEARCH).setSummary(settings.getString(PREF_SEARCH, DEFAULT_SEARCH)); 
     	getPreferenceScreen().findPreference(PREF_EXCLUDEPAT).setSummary(settings.getString(PREF_EXCLUDEPAT, DEFAULT_EXCLUDEPAT)); 

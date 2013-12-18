@@ -47,7 +47,7 @@ import android.preference.PreferenceManager;
 
 public class SipdroidEngine implements RegisterAgentListener {
 
-	public static final int LINES = 2;
+	public static int LINES = 2;
 	public int pref;
 	
 	public static final int UNINITIALIZED = 0x0;
@@ -70,6 +70,14 @@ public class SipdroidEngine implements RegisterAgentListener {
 	static PowerManager.WakeLock[] wl;
 	public static PowerManager.WakeLock[] pwl;
 	static WifiManager.WifiLock[] wwl;
+	
+	public SipdroidEngine() {
+		UpdateLines();
+	}
+	
+	public void UpdateLines() {
+		LINES = PreferenceManager.getDefaultSharedPreferences(getUIContext()).getInt(org.sipdroid.sipua.ui.AccountSettings.PREF_LINES, LINES);
+	}
 	
 	UserAgentProfile getUserAgentProfile(String suffix) {
 		UserAgentProfile user_profile = new UserAgentProfile(null);
@@ -107,11 +115,14 @@ public class SipdroidEngine implements RegisterAgentListener {
 					edit.putBoolean(org.sipdroid.sipua.ui.Settings.PREF_KEEPON, true);
 					edit.commit();
 				}
-				wl = new PowerManager.WakeLock[LINES];
-				pwl = new PowerManager.WakeLock[LINES];
-				wwl = new WifiManager.WifiLock[LINES];
 			}
+			
+			wl = new PowerManager.WakeLock[LINES];
+			pwl = new PowerManager.WakeLock[LINES];
+			wwl = new WifiManager.WifiLock[LINES];
+			
 			pref = ChangeAccount.getPref(Receiver.mContext);
+			if(pref >= LINES) pref = 0;
 
 			uas = new UserAgent[LINES];
 			ras = new RegisterAgent[LINES];
@@ -121,7 +132,7 @@ public class SipdroidEngine implements RegisterAgentListener {
 			user_profiles = new UserAgentProfile[LINES];
 			user_profiles[0] = getUserAgentProfile("");
 			for (int i = 1; i < LINES; i++)
-				user_profiles[1] = getUserAgentProfile(""+i);
+				user_profiles[i] = getUserAgentProfile(""+i);
 			
 			SipStack.init(null);
 			int i = 0;
