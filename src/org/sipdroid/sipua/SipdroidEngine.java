@@ -24,6 +24,7 @@ package org.sipdroid.sipua;
 import java.io.IOException;
 import java.net.UnknownHostException;
 
+import org.sipdroid.net.DnsSrv;
 import org.sipdroid.net.KeepAliveSip;
 import org.sipdroid.sipua.ui.ChangeAccount;
 import org.sipdroid.sipua.ui.LoopAlarm;
@@ -70,7 +71,7 @@ public class SipdroidEngine implements RegisterAgentListener {
 	static PowerManager.WakeLock[] wl;
 	public static PowerManager.WakeLock[] pwl;
 	static WifiManager.WifiLock[] wwl;
-	
+
 	public SipdroidEngine() {
 		UpdateLines();
 	}
@@ -517,7 +518,21 @@ public class SipdroidEngine implements RegisterAgentListener {
 		int i = 0;
 		for (SipProvider sip_provider : sip_providers) {
 			try {
-				edit.putString(Settings.PREF_DNS+i, IpAddress.getByName(PreferenceManager.getDefaultSharedPreferences(getUIContext()).getString(Settings.PREF_SERVER+(i!=0?i:""), "")).toString());
+				String server = PreferenceManager.getDefaultSharedPreferences(getUIContext()).getString(Settings.PREF_SERVER+(i!=0?i:""), "");
+				if(server.equals("")) {
+					i++;
+					continue;
+				}
+				
+				SocketAddress[] sas = DnsSrv.GetInstance().getHostSRV(server, sip_provider.getDefaultTransport().equals(SipProvider.PROTO_TLS) ? "sips" : "sip", 
+						sip_provider.getDefaultTransport().equals(SipProvider.PROTO_TLS) ? SipProvider.PROTO_TCP : sip_provider.getDefaultTransport());
+				
+				if(sas != null && sas[0] != null) {
+					edit.putString(Settings.PREF_DNS+i, IpAddress.getByName(sas[0].getAddress().toString()).toString());										
+					edit.putString(Settings.PREF_PORT+(i!=0?i:""), Integer.toString(sas[0].getPort()));
+				} else {
+					edit.putString(Settings.PREF_DNS+i, IpAddress.getByName(server).toString());
+				}
 			} catch (UnknownHostException e1) {
 				i++;
 				continue;

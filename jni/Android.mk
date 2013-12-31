@@ -5,6 +5,31 @@ SILK     := silk
 include $(CLEAR_VARS)
 LOCAL_MODULE    := OSNetworkSystem
 LOCAL_SRC_FILES := OSNetworkSystem.cpp
+LOCAL_CFLAGS := -O3
+include $(BUILD_SHARED_LIBRARY)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE    := DnsSrv
+UDNS_PATH 		:= udns
+LOCAL_C_INCLUDES := $(LOCAL_PATH)/$(UDNS_PATH)
+LOCAL_SRC_FILES := 	$(UDNS_PATH)/udns_dn.c \
+					$(UDNS_PATH)/udns_dntosp.c \
+					$(UDNS_PATH)/udns_parse.c \
+					$(UDNS_PATH)/udns_resolver.c \
+					$(UDNS_PATH)/udns_init.c \
+					$(UDNS_PATH)/udns_misc.c \
+					$(UDNS_PATH)/udns_XtoX.c \
+					$(UDNS_PATH)/udns_rr_a.c \
+					$(UDNS_PATH)/udns_rr_ptr.c \
+					$(UDNS_PATH)/udns_rr_mx.c \
+					$(UDNS_PATH)/udns_rr_txt.c \
+					$(UDNS_PATH)/udns_bl.c \
+					$(UDNS_PATH)/udns_rr_srv.c \
+					$(UDNS_PATH)/udns_rr_naptr.c \
+					$(UDNS_PATH)/udns_codes.c \
+					$(UDNS_PATH)/udns_jran.c
+LOCAL_SRC_FILES += 	dnssrv.cpp
+LOCAL_CFLAGS := -O3 -DHAVE_INET_PTON_NTOP -DHAVE_IPv6
 include $(BUILD_SHARED_LIBRARY)
 
 include $(CLEAR_VARS)
@@ -78,7 +103,7 @@ LOCAL_SRC_FILES := bv16_jni.cpp \
 	$(BV16)/bv16/ptquan.c \
 	$(BV16)/bv16/tables.c 
 	
-LOCAL_ARM_MODE := arm
+#LOCAL_ARM_MODE := arm
 LOCAL_LDLIBS := -L$(SYSROOT)/usr/lib -llog
 LOCAL_C_INCLUDES += $(LOCAL_PATH)/$(BV16)/bvcommon $(LOCAL_PATH)/$(BV16)/bv16 $(LOCAL_PATH)/$(BV16)
 #LOCAL_CFLAGS = -O3 -marm -march=armv6 -mtune=arm1136j-s -DWMOPS=0 -DG192BITSTREAM=0
@@ -203,7 +228,7 @@ LOCAL_SRC_FILES :=  $(SILK)/src/SKP_Silk_A2NLSF.c \
 	$(SILK)/src/SKP_Silk_tables_sign.c \
 	$(SILK)/src/SKP_Silk_tables_type_offset.c
 	
-LOCAL_ARM_MODE := arm
+#LOCAL_ARM_MODE := arm
 LOCAL_CFLAGS = -O3 
 LOCAL_LDLIBS := -L$(SYSROOT)/usr/lib -llog
 LOCAL_C_INCLUDES += $(LOCAL_PATH)/$(SILK)/src $(LOCAL_PATH)/$(SILK)/interface
@@ -216,7 +241,7 @@ LOCAL_SRC_FILES := silk8_jni.cpp
 LOCAL_C_INCLUDES += $(LOCAL_PATH)/$(SILK)/src $(LOCAL_PATH)/$(SILK)/interface
 LOCAL_CFLAGS = -O3 
 LOCAL_STATIC_LIBRARIES :=  silkcommon
-LOCAL_ARM_MODE := arm
+#LOCAL_ARM_MODE := arm
 LOCAL_LDLIBS := -L$(SYSROOT)/usr/lib -llog
 include $(BUILD_SHARED_LIBRARY)
 
@@ -226,7 +251,7 @@ LOCAL_SRC_FILES := silk16_jni.cpp
 LOCAL_C_INCLUDES += $(LOCAL_PATH)/$(SILK)/src $(LOCAL_PATH)/$(SILK)/interface
 LOCAL_CFLAGS = -O3 
 LOCAL_STATIC_LIBRARIES :=  silkcommon
-LOCAL_ARM_MODE := arm
+#LOCAL_ARM_MODE := arm
 LOCAL_LDLIBS := -L$(SYSROOT)/usr/lib -llog
 include $(BUILD_SHARED_LIBRARY)
 
@@ -236,7 +261,7 @@ LOCAL_SRC_FILES := silk24_jni.cpp
 LOCAL_C_INCLUDES += $(LOCAL_PATH)/$(SILK)/src $(LOCAL_PATH)/$(SILK)/interface
 LOCAL_CFLAGS = -O3 
 LOCAL_STATIC_LIBRARIES :=  silkcommon
-LOCAL_ARM_MODE := arm
+#LOCAL_ARM_MODE := arm
 LOCAL_LDLIBS := -L$(SYSROOT)/usr/lib -llog
 include $(BUILD_SHARED_LIBRARY)
 
@@ -246,7 +271,7 @@ LOCAL_MODULE    := g722_jni
 LOCAL_SRC_FILES := g722_jni.cpp \
 	$(SPANDSP)/g722.c \
 	$(SPANDSP)/vector_int.c
-LOCAL_ARM_MODE := arm
+#LOCAL_ARM_MODE := arm
 LOCAL_LDLIBS := -L$(SYSROOT)/usr/lib -llog
 LOCAL_C_INCLUDES += $(LOCAL_PATH)/$(SPANDSP)/spandsp $(LOCAL_PATH)/$(SPANDSP)
 LOCAL_CFLAGS = -O3
@@ -263,7 +288,7 @@ LOCAL_SRC_FILES := gsm_jni.cpp \
 	$(SPANDSP)/gsm0610_rpe.c \
 	$(SPANDSP)/gsm0610_short_term.c \
 	$(SPANDSP)/gsm0610_long_term.c
-LOCAL_ARM_MODE := arm
+#LOCAL_ARM_MODE := arm
 LOCAL_LDLIBS := -L$(SYSROOT)/usr/lib -llog
 LOCAL_C_INCLUDES += $(LOCAL_PATH)/$(SPANDSP)/spandsp $(LOCAL_PATH)/$(SPANDSP)
 LOCAL_CFLAGS = -O3
@@ -272,12 +297,50 @@ include $(BUILD_SHARED_LIBRARY)
 ### g729 codec ###
 include $(CLEAR_VARS)
 LOCAL_MODULE := g729_jni
+ifeq ($(TARGET_ARCH_ABI),armeabi-v7a)
+G729_PATH := g729-arm-v7
+LOCAL_C_INCLUDES += $(LOCAL_PATH)/$(G729_PATH)/include 
+LOCAL_SRC_FILES := 	$(G729_PATH)/src/acelp_ca.c \
+					$(G729_PATH)/src/basic_op.c \
+					$(G729_PATH)/src/bits.c \
+					$(G729_PATH)/src/cod_ld8a.c \
+					$(G729_PATH)/src/cor_func.c \
+					$(G729_PATH)/src/de_acelp.c \
+					$(G729_PATH)/src/dec_gain.c \
+					$(G729_PATH)/src/dec_lag3.c \
+					$(G729_PATH)/src/dec_ld8a.c \
+					$(G729_PATH)/src/dspfunc.c \
+					$(G729_PATH)/src/filter.c \
+					$(G729_PATH)/src/gainpred.c \
+					$(G729_PATH)/src/lpc.c \
+					$(G729_PATH)/src/lpcfunc.c \
+					$(G729_PATH)/src/lspdec.c \
+					$(G729_PATH)/src/lspgetq.c \
+					$(G729_PATH)/src/oper_32b.c \
+					$(G729_PATH)/src/p_parity.c \
+					$(G729_PATH)/src/pitch_a.c \
+					$(G729_PATH)/src/post_pro.c \
+					$(G729_PATH)/src/postfilt.c \
+					$(G729_PATH)/src/pre_proc.c \
+					$(G729_PATH)/src/pred_lt3.c \
+					$(G729_PATH)/src/qua_gain.c \
+					$(G729_PATH)/src/qua_lsp.c \
+					$(G729_PATH)/src/tab_ld8a.c \
+					$(G729_PATH)/src/util.c \
+					$(G729_PATH)/src/taming.c \
+					$(G729_PATH)/src/g729a_decoder.c \
+					$(G729_PATH)/src/g729a_encoder.c
+LOCAL_SRC_FILES +=  g729_jni.cpp
+#LOCAL_ARM_MODE := arm
+LOCAL_CFLAGS := -O3 -DARCH_ARMV6
+else
 G729_PATH := $(LOCAL_PATH)/g729
 LOCAL_C_INCLUDES += $(G729_PATH)/include
 G729_FILES := $(wildcard $(G729_PATH)/src/*.c)
 LOCAL_SRC_FILES += $(G729_FILES:$(LOCAL_PATH)/%=%) 
 LOCAL_SRC_FILES += g729_jni.cpp
-LOCAL_ARM_MODE := arm
+#LOCAL_ARM_MODE := arm
 LOCAL_CFLAGS := -O3
+endif
 LOCAL_STATIC_LIBRARIES += libgcc
 include $(BUILD_SHARED_LIBRARY)
