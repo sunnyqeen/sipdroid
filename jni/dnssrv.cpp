@@ -9,6 +9,15 @@
 #include <string.h>
 #include "udns.h"
 
+int srv_cmp(const void* v1, const void* v2) {
+	struct dns_srv* srv1 = (struct dns_srv*)v1;
+	struct dns_srv* srv2 = (struct dns_srv*)v2;
+	if(srv1->priority == srv2->priority)
+		return srv2->weight - srv1->weight;
+	else
+		return srv1->priority - srv2->priority;
+}
+
 extern "C" jobjectArray Java_org_sipdroid_net_DnsSrv_getHostSRV(JNIEnv* env, jclass clazz,
         jstring nameStr, jstring srvStr, jstring protoStr, jstring dnsStr0, jstring dnsStr1) {
     if (nameStr == NULL || srvStr == NULL || protoStr == NULL || (dnsStr0 == NULL && dnsStr1 == NULL)) {
@@ -90,6 +99,7 @@ extern "C" jobjectArray Java_org_sipdroid_net_DnsSrv_getHostSRV(JNIEnv* env, jcl
 
 		struct dns_rr_srv *rrsrv = dns_resolve_srv(nctx, name, srv, proto, 0);
 		if(rrsrv) {
+			qsort(rrsrv->dnssrv_srv, rrsrv->dnssrv_nrr, sizeof(struct dns_srv), srv_cmp);
 			ret = (jobjectArray)env->NewObjectArray(rrsrv->dnssrv_nrr, env->FindClass("java/lang/String"), env->NewStringUTF(""));
 			char buf[DNS_MAXNAME*2];
 			for (int i = 0; i < rrsrv->dnssrv_nrr; i++) {				
