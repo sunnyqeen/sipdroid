@@ -123,6 +123,7 @@ public class Settings extends PreferenceActivity implements OnSharedPreferenceCh
 	public static final String PREF_STUN = "stun";
 	public static final String PREF_STUN_SERVER = "stun_server";
 	public static final String PREF_STUN_SERVER_PORT = "stun_server_port";
+	public static final String PREF_REGISTER_EXPIRES = "register_expires";
 	
 	// MMTel configurations (added by mandrajg)
 	public static final String PREF_MMTEL = "mmtel";
@@ -178,6 +179,7 @@ public class Settings extends PreferenceActivity implements OnSharedPreferenceCh
 	public static final boolean	DEFAULT_STUN = false;
 	public static final String	DEFAULT_STUN_SERVER = "stun.ekiga.net";
 	public static final String	DEFAULT_STUN_SERVER_PORT = "3478";
+	public static final String	DEFAULT_REGISTER_EXPIRES = "3600";
 	
 	// MMTel configuration (added by mandrajg)
 	public static final boolean	DEFAULT_MMTEL = false;

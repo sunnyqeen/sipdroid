@@ -104,6 +104,7 @@ public class AccountSettings extends PreferenceActivity implements OnSharedPrefe
 				edit.putString(Settings.PREF_SERVER+j, Settings.DEFAULT_SERVER);
 				edit.putString(Settings.PREF_PREF+j, Settings.DEFAULT_PREF);				
 				edit.putString(Settings.PREF_PROTOCOL+j, Settings.DEFAULT_PROTOCOL);
+				edit.putString(Settings.PREF_REGISTER_EXPIRES+j, Settings.DEFAULT_REGISTER_EXPIRES);
 				edit.commit();
 	        	Receiver.engine(this).updateDNS();
 	        	reload();
@@ -210,6 +211,7 @@ public class AccountSettings extends PreferenceActivity implements OnSharedPrefe
         			key.startsWith(Settings.PREF_PORT) ||
         			key.startsWith(Settings.PREF_PROTOCOL) ||
         			key.startsWith(Settings.PREF_VPN) ||
+					key.startsWith(Settings.PREF_REGISTER_EXPIRES) ||
         			key.startsWith(Settings.PREF_FROMUSER)) {
         	Receiver.engine(this).halt();
     		Receiver.engine(this).StartEngine();
@@ -243,7 +245,8 @@ public class AccountSettings extends PreferenceActivity implements OnSharedPrefe
 	    	getPreferenceScreen().findPreference(Settings.PREF_PROTOCOL+j).setSummary(settings.getString(Settings.PREF_PROTOCOL+j,
 	    		settings.getString(Settings.PREF_SERVER+j, Settings.DEFAULT_SERVER).equals(Settings.DEFAULT_SERVER) ? "tcp" : "udp").toUpperCase());
 	    	getPreferenceScreen().findPreference(Settings.PREF_ACCOUNT+j).setSummary(username.equals("")||server.equals("")?getResources().getString(R.string.settings_line)+" "+(i+1):username+"@"+server);
-       	}
+			getPreferenceScreen().findPreference(Settings.PREF_REGISTER_EXPIRES+j).setSummary(settings.getString(Settings.PREF_REGISTER_EXPIRES+j, Settings.DEFAULT_REGISTER_EXPIRES));
+		}
    }
 
     @Override

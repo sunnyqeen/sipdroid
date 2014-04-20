@@ -269,6 +269,7 @@
 <string name="settings_selectwifi2">By signal level</string>
 <string name="settings_ownwifi">Control Wi-Fi Power</string>
 <string name="settings_ownwifi2">Saves battery</string>
+<string name="settings_register_expires">Register Expires</string>
 
 <string name="menu_settings">Settings</string>
 <string name="menu_exit">Exit</string>

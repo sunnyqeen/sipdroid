@@ -54,6 +54,12 @@
 				android:key="vpn"
 				android:title="@string/settings_vpn"
 				android:summary="@string/settings_vpn2" />
+			<EditTextPreference
+				android:key="register_expires"
+				android:title="@string/settings_register_expires"
+				android:inputType="number"
+				android:numeric="integer"
+				android:singleLine="true" />
 	</PreferenceScreen>
 	<PreferenceScreen android:title="@string/settings_account"
 				android:key="account1">
@@ -107,6 +113,12 @@
 				android:key="vpn1"
 				android:title="@string/settings_vpn"
 				android:summary="@string/settings_vpn2" />
+			<EditTextPreference
+				android:key="register_expires1"
+				android:title="@string/settings_register_expires"
+				android:inputType="number"
+				android:numeric="integer"
+				android:singleLine="true" />
 	</PreferenceScreen>
 	<PreferenceScreen android:title="@string/settings_account"
 				android:key="account2">
@@ -160,6 +172,12 @@
 				android:key="vpn2"
 				android:title="@string/settings_vpn"
 				android:summary="@string/settings_vpn2" />
+			<EditTextPreference
+				android:key="register_expires2"
+				android:title="@string/settings_register_expires"
+				android:inputType="number"
+				android:numeric="integer"
+				android:singleLine="true" />
 	</PreferenceScreen>
 	<PreferenceScreen android:title="@string/settings_account"
 				android:key="account3">
@@ -213,6 +231,12 @@
 				android:key="vpn3"
 				android:title="@string/settings_vpn"
 				android:summary="@string/settings_vpn2" />
+			<EditTextPreference
+				android:key="register_expires3"
+				android:title="@string/settings_register_expires"
+				android:inputType="number"
+				android:numeric="integer"
+				android:singleLine="true" />
 	</PreferenceScreen>
 	<PreferenceScreen android:title="@string/settings_account"
 				android:key="account4">
@@ -266,5 +290,11 @@
 				android:key="vpn4"
 				android:title="@string/settings_vpn"
 				android:summary="@string/settings_vpn2" />
+			<EditTextPreference
+				android:key="register_expires4"
+				android:title="@string/settings_register_expires"
+				android:inputType="number"
+				android:numeric="integer"
+				android:singleLine="true" />
 	</PreferenceScreen>
 </PreferenceScreen>

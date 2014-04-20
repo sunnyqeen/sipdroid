@@ -103,6 +103,8 @@ public class SipdroidEngine implements RegisterAgentListener {
 
 		user_profile.pub = PreferenceManager.getDefaultSharedPreferences(getUIContext()).getBoolean(Settings.PREF_EDGE+suffix, Settings.DEFAULT_EDGE) ||
 			PreferenceManager.getDefaultSharedPreferences(getUIContext()).getBoolean(Settings.PREF_3G+suffix, Settings.DEFAULT_3G);
+			
+		user_profile.expires = Integer.parseInt(PreferenceManager.getDefaultSharedPreferences(getUIContext()).getString(Settings.PREF_REGISTER_EXPIRES+suffix, Settings.DEFAULT_REGISTER_EXPIRES));
 		return user_profile;
 	}
 

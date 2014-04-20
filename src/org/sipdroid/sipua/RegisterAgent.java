@@ -142,6 +142,7 @@ public class RegisterAgent implements TransactionClientListener, SubscriberDialo
 		this.realm = realm;
 		this.passwd = passwd;
 		this.user_profile = user_profile;
+		this.expire_time = user_profile.expires;
 		
 		// IMS specifics (added by mandrajg)
 		this.qvalue = qvalue;
@@ -164,7 +165,6 @@ public class RegisterAgent implements TransactionClientListener, SubscriberDialo
 		this.log = sip_provider.getLog();
 		this.target = new NameAddress(target_url);
 		this.contact = new NameAddress(contact_url);
-		this.expire_time = SipStack.default_expires;
 		
 		// authentication
 		this.username = null;
@@ -477,7 +477,7 @@ public class RegisterAgent implements TransactionClientListener, SubscriberDialo
 				if (listener != null)
 				{
 					listener.onUaRegistrationSuccess(this, target, contact, result);
-					Receiver.reRegister(expires);
+					Receiver.reRegister((expires > this.expire_time || expires < 60) ? this.expire_time : expires);
 				}
 			}
 			else
