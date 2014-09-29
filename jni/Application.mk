@@ -13,5 +13,5 @@ APP_MODULES	 += g729_jni
 
 APP_OPTIM        := release 
 APP_CFLAGS       += -O3
-APP_ABI			:= armeabi armeabi-v7a
+APP_ABI			:= armeabi armeabi-v7a x86
 APP_PLATFORM := android-5
