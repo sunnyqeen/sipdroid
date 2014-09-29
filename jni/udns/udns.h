@@ -23,7 +23,7 @@
 
 #ifndef UDNS_VERSION	/* include guard */
 
-#define UDNS_VERSION "0.2"
+#define UDNS_VERSION "0.4"
 
 #ifdef WINDOWS
 # ifdef UDNS_DYNAMIC_LIBRARY
