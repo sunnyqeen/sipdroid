@@ -53,7 +53,9 @@ public class AccountSettings extends PreferenceActivity implements OnSharedPrefe
 	public static final String PREF_LINES = "lines";
 	
 	private SharedPreferences settings = null;
-		
+
+	private boolean needRestartEngine = false;
+
 	// IDs of the menu items
 	private static final int MENU_PLUS = 0;
 	private static final int MENU_MINUS = 1;
@@ -148,6 +150,16 @@ public class AccountSettings extends PreferenceActivity implements OnSharedPrefe
 
         return false;
     }
+	
+	@Override
+	protected void onStop(){
+		super.onStop();
+		if(needRestartEngine) {
+    		Receiver.engine(this).halt();
+			Receiver.engine(this).UpdateLines();
+    		Receiver.engine(this).StartEngine();
+		}
+	}
 
 	@Override
 	public void onDestroy()	{
@@ -193,8 +205,7 @@ public class AccountSettings extends PreferenceActivity implements OnSharedPrefe
     					ListPreference lp = (ListPreference) getPreferenceScreen().findPreference(Settings.PREF_PORT+j);
     					lp.setValue(sharedPreferences.getString(Settings.PREF_PROTOCOL+j, Settings.DEFAULT_PROTOCOL).equals("tls") ? "5070" : "5061");
     				} else {
-    		        	Receiver.engine(this).halt();
-    		    		Receiver.engine(this).StartEngine();
+    		        	needRestartEngine = true;
     				}
     			}
     		}
@@ -213,12 +224,9 @@ public class AccountSettings extends PreferenceActivity implements OnSharedPrefe
         			key.startsWith(Settings.PREF_VPN) ||
 					key.startsWith(Settings.PREF_REGISTER_EXPIRES) ||
         			key.startsWith(Settings.PREF_FROMUSER)) {
-        	Receiver.engine(this).halt();
-    		Receiver.engine(this).StartEngine();
+        	needRestartEngine = true;
 		} else if (key.equals(PREF_LINES)) {
-			Receiver.engine(this).halt();
-			Receiver.engine(this).UpdateLines();
-    		Receiver.engine(this).StartEngine();
+			needRestartEngine = true;
 		}
 		updateSummaries(SipdroidEngine.LINES);
     }

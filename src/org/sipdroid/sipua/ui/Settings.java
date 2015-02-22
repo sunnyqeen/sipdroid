@@ -64,6 +64,8 @@ public class Settings extends PreferenceActivity implements OnSharedPreferenceCh
 	private String[] profileFiles = null;
 	// Which profile file to delete
 	private int profileToDelete;
+	
+	private boolean needRestartEngine = false;
 
 	// IDs of the menu items
 	private static final int MENU_IMPORT = 0;
@@ -272,7 +274,16 @@ public class Settings extends PreferenceActivity implements OnSharedPreferenceCh
 		addPreferencesFromResource(R.xml.preferences);
 		setDefaultValues();
 	}
-	
+
+	@Override
+	protected void onStop(){
+		super.onStop();
+		if(needRestartEngine) {
+    		Receiver.engine(this).halt();
+    		Receiver.engine(this).StartEngine();
+		}
+	}
+
 	void reload() {
 		setPreferenceScreen(null);
 		addPreferencesFromResource(R.xml.preferences);		
@@ -433,8 +444,7 @@ public class Settings extends PreferenceActivity implements OnSharedPreferenceCh
    			setDefaultValues();
 
            	// Restart the engine
-       		Receiver.engine(context).halt();
-   			Receiver.engine(context).StartEngine();
+       		needRestartEngine = true;
    			
    			reload();
    			settings.registerOnSharedPreferenceChangeListener(context);
@@ -557,8 +567,7 @@ public class Settings extends PreferenceActivity implements OnSharedPreferenceCh
         			key.equals(PREF_MWI_ENABLED) ||
         			key.equals(PREF_REGISTRATION) ||
         			key.equals(PREF_KEEPON)) {
-        	Receiver.engine(this).halt();
-    		Receiver.engine(this).StartEngine();
+        	needRestartEngine = true;
 		}
 		updateSummaries();
     }
