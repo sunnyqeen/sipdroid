@@ -54,10 +54,10 @@ public class Codecs {
 //			add(new SILK8());
 			add(new alaw());
 			add(new ulaw());
+			add(new G729());
 			add(new Speex());
 			add(new GSM());
 			add(new BV16());
-			add(new G729());
 		}};
 	private static final HashMap<Integer, Codec> codecsNumbers;
 	private static final HashMap<String, Codec> codecsNames;
@@ -158,13 +158,7 @@ public class Codecs {
 			l.setPersistent(true);
 			l.setEnabled(!c.isFailed());
 			c.setListPreference(l);
-			if (c.number() == 9)
-				if (ps.getSharedPreferences().getString(Settings.PREF_SERVER, Settings.DEFAULT_SERVER).equals(Settings.DEFAULT_SERVER))
-					l.setSummary(l.getEntry()+" ("+r.getString(R.string.settings_improve2)+")");
-				else
-					l.setSummary(l.getEntry()+" ("+r.getString(R.string.settings_hdvoice)+")");
-			else
-				l.setSummary(l.getEntry());
+			l.setSummary(l.getEntry());
 			l.setTitle(c.getTitle());
 			ps.addPreference(l);
 		}

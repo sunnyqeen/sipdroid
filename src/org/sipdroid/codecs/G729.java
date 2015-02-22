@@ -28,7 +28,7 @@ class G729 extends CodecBase implements Codec {
 		CODEC_USER_NAME = "G729";
 		CODEC_DESCRIPTION = "8kbit";
 		CODEC_NUMBER = 18;
-		CODEC_DEFAULT_SETTING = "never";
+		CODEC_DEFAULT_SETTING = "always";
 		super.update();
 	}
 
