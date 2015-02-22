@@ -573,8 +573,13 @@ public class UserAgent extends CallListenerAdapter {
 				return;
 			}
 		}
-		call.ring(local_session);		
-		launchMediaApplication();
+		call.ring(local_session);
+		try {
+			launchMediaApplication();		
+		} catch (Exception e) {
+			printLog("launchMediaApplication: " + e.getMessage(), LogLevel.HIGH);
+			changeStatus(UA_STATE_IDLE);
+		}
 	}
 
 	/**

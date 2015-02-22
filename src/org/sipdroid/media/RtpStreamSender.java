@@ -420,7 +420,7 @@ public class RtpStreamSender extends Thread {
 					 last_tx_time += next_tx_delay-sync_adj;
 				 }
 			 }
-			 pos = (ring+delay*frame_rate*frame_size/2)%(frame_size*(frame_rate+1));
+			 pos = (ring+delay*frame_rate*frame_size/2)%(frame_size*frame_rate);
 			 num = record.read(lin,pos,frame_size);
 			 if (num <= 0)
 				 continue;
