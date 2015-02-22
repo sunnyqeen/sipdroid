@@ -154,10 +154,10 @@
 struct CachedFields {
     jfieldID fd_descriptor;
     jclass iaddr_class;
-    jmethodID iaddr_class_init;
+    // jmethodID iaddr_class_init;
     jmethodID iaddr_getbyaddress;
     jfieldID iaddr_ipaddress;
-    jclass genericipmreq_class;
+    // jclass genericipmreq_class;
     jclass integer_class;
     jmethodID integer_class_init;
     jfieldID integer_class_value;
@@ -1203,7 +1203,7 @@ extern "C" void Java_org_sipdroid_net_impl_OSNetworkSystem_oneTimeInitialization
     }
 
     gCachedFields.iaddr_class = (jclass) env->NewGlobalRef(iaddrclass);
-
+/*
     jmethodID iaddrclassinit = env->GetMethodID(iaddrclass, "<init>", "()V");
 
     if (iaddrclassinit == NULL) {
@@ -1212,7 +1212,7 @@ extern "C" void Java_org_sipdroid_net_impl_OSNetworkSystem_oneTimeInitialization
     }
 
     gCachedFields.iaddr_class_init = iaddrclassinit;
-
+*/
     jmethodID iaddrgetbyaddress = env->GetStaticMethodID(iaddrclass,
             "getByAddress", "([B)Ljava/net/InetAddress;");
 
@@ -1235,7 +1235,7 @@ extern "C" void Java_org_sipdroid_net_impl_OSNetworkSystem_oneTimeInitialization
     gCachedFields.iaddr_ipaddress = iaddripaddress;
 
     // get the GenericIPMreq class
-
+/*
     jclass genericipmreqclass = env->FindClass("org/apache/harmony/luni/net/GenericIPMreq");
 
     if (genericipmreqclass == NULL) {
@@ -1245,7 +1245,7 @@ extern "C" void Java_org_sipdroid_net_impl_OSNetworkSystem_oneTimeInitialization
     }
 
     gCachedFields.genericipmreq_class = (jclass) env->NewGlobalRef(genericipmreqclass);
-
+*/
     // initializing Integer
 
     jclass integerclass = env->FindClass("java/lang/Integer");
@@ -3109,7 +3109,7 @@ extern "C" void Java_org_sipdroid_net_impl_OSNetworkSystem_setSocketOptionImpl(J
             throwSocketException(env, SOCKERR_BADSOCKET);
             return;
         }
-    } else if (env->IsInstanceOf(optVal, gCachedFields.genericipmreq_class)) {
+    /*} else if (env->IsInstanceOf(optVal, gCachedFields.genericipmreq_class)) {*/
         // we'll use optVal directly
     } else {
         throwSocketException(env, SOCKERR_OPTUNSUPP);

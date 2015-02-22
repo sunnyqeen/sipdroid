@@ -41,7 +41,7 @@ public class SipdroidSocket extends DatagramSocket {
 		if (loaded) {
 			impl = new PlainDatagramSocketImpl();
 			impl.create();
-			impl.bind(port,InetAddress.getByName("0"));
+			impl.bind(port,InetAddress.getByName("0.0.0.0"));
 		}
 	}
 	
@@ -81,7 +81,7 @@ public class SipdroidSocket extends DatagramSocket {
 	static {
 			try {
 		        System.loadLibrary("OSNetworkSystem");
-		        OSNetworkSystem.getOSNetworkSystem().oneTimeInitialization(true);
+		        OSNetworkSystem.oneTimeInitialization(true);
 		        SipdroidSocket.loaded = true;
 			} catch (Throwable e) {
 			}

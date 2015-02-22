@@ -737,12 +737,12 @@ public final class OSNetworkSystem {
         return inheritedChannelImpl();
     }
     
-    public void oneTimeInitialization(boolean jcl_supports_ipv6){
+    public static void oneTimeInitialization(boolean jcl_supports_ipv6){
         if (!isNetworkInited){
             oneTimeInitializationImpl(jcl_supports_ipv6);
             isNetworkInited = true;
         } 
     }
     
-    native void oneTimeInitializationImpl (boolean jcl_supports_ipv6);
+    static native void oneTimeInitializationImpl (boolean jcl_supports_ipv6);
 }
