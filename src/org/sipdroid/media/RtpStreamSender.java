@@ -319,6 +319,7 @@ public class RtpStreamSender extends Thread {
 		AudioRecord record = null;
 		
 		short[] lin = new short[frame_size*(frame_rate+1)];
+		short[] record_buffer = new short[frame_size];
 		int num,ring = 0,pos;
 		random = new Random();
 		InputStream alerting = null;
@@ -420,8 +421,15 @@ public class RtpStreamSender extends Thread {
 					 last_tx_time += next_tx_delay-sync_adj;
 				 }
 			 }
-			 pos = (ring+delay*frame_rate*frame_size/2)%(frame_size*frame_rate);
-			 num = record.read(lin,pos,frame_size);
+			 pos = (ring+delay*frame_rate*frame_size/2)%(frame_size*(frame_rate+1));
+			 if (android.os.Build.VERSION.SDK_INT != 21) {
+				 num = record.read(lin,pos,frame_size);
+			 } else {
+				 num = record.read(record_buffer,0,frame_size);
+				 if(num > 0) {
+					 System.arraycopy(record_buffer, 0, lin, pos, num);
+				 }
+			 }
 			 if (num <= 0)
 				 continue;
 			 if (!p_type.codec.isValid())
