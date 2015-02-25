@@ -21,8 +21,6 @@
  * You should have received a copy of the GNU Lesser General Public
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
- *
- * $Id: t30.h,v 1.126.4.1 2009/12/19 09:47:56 steveu Exp $
  */
 
 /*! \file */
@@ -263,7 +261,7 @@ enum
     T30_ERR_RX_GOTDCS,          /*! DCS received while waiting for DTC */
     T30_ERR_RX_INVALCMD,        /*! Unexpected command after page received */
     T30_ERR_RX_NOCARRIER,       /*! Carrier lost during fax receive */
-    T30_ERR_RX_NOEOL,           /*! Timed out while waiting for EOL (end Of line) */
+    T30_ERR_RX_NOEOL,           /*! Timed out while waiting for EOL (end of line) */
     T30_ERR_RX_NOFAX,           /*! Timed out while waiting for first line */
     T30_ERR_RX_T2EXPDCN,        /*! Timer T2 expired while waiting for DCN */
     T30_ERR_RX_T2EXPD,          /*! Timer T2 expired while waiting for phase D */
@@ -321,6 +319,7 @@ enum
     T30_MODEM_V27TER,
     T30_MODEM_V29,
     T30_MODEM_V17,
+    T30_MODEM_V34HDX,
     T30_MODEM_DONE
 };
 
@@ -346,7 +345,7 @@ enum
     /*! Support the V.17 modem (14400, 12000, 9600 and 7200bps) for image transfer. */
     T30_SUPPORT_V17 = 0x04,
     /*! Support the V.34 modem (up to 33,600bps) for image transfer. */
-    T30_SUPPORT_V34 = 0x08,
+    T30_SUPPORT_V34HDX = 0x08,
     /*! Support the Internet aware FAX mode (no bit rate limit) for image transfer. */
     T30_SUPPORT_IAF = 0x10
 };
@@ -361,18 +360,20 @@ enum
     T30_SUPPORT_T4_2D_COMPRESSION = 0x04,
     /*! T.6 2D compression */
     T30_SUPPORT_T6_COMPRESSION = 0x08,
-    /*! T.85 monochrome JBIG compression */
+    /*! T.85 monochrome JBIG compression, with fixed L0 */
     T30_SUPPORT_T85_COMPRESSION = 0x10,
+    /*! T.85 monochrome JBIG compression, with variable L0 */
+    T30_SUPPORT_T85_L0_COMPRESSION = 0x20,
     /*! T.43 colour JBIG compression */
-    T30_SUPPORT_T43_COMPRESSION = 0x20,
+    T30_SUPPORT_T43_COMPRESSION = 0x40,
     /*! T.45 run length colour compression */
-    T30_SUPPORT_T45_COMPRESSION = 0x40,
+    T30_SUPPORT_T45_COMPRESSION = 0x80,
     /*! T.81 + T.30 Annex E colour JPEG compression */
-    T30_SUPPORT_T81_COMPRESSION = 0x80,
+    T30_SUPPORT_T81_COMPRESSION = 0x100,
     /*! T.81 + T.30 Annex K colour sYCC-JPEG compression */
-    T30_SUPPORT_SYCC_T81_COMPRESSION = 0x100,
+    T30_SUPPORT_SYCC_T81_COMPRESSION = 0x200,
     /*! T.88 monochrome JBIG2 compression */
-    T30_SUPPORT_T88_COMPRESSION = 0x200
+    T30_SUPPORT_T88_COMPRESSION = 0x400
 };
 
 enum
@@ -544,8 +545,14 @@ typedef struct
     int longest_bad_row_run;
     /*! \brief The number of HDLC frame retries, if error correcting mode is used. */
     int error_correcting_mode_retries;
-    /*! \brief Current status */
+    /*! \brief Current status. */
     int current_status;
+#if 0
+    /*! \brief The number of RTP events in this call. */
+    int rtp_events;
+    /*! \brief The number of RTN events in this call. */
+    int rtn_events;
+#endif
 } t30_stats_t;
 
 #if defined(__cplusplus)
@@ -674,6 +681,12 @@ SPAN_DECLARE(void) t30_get_transfer_statistics(t30_state_t *s, t30_stats_t *t);
     \param s The T.30 context.
     \param state TRUE to enable interrupt request, else FALSE. */
 SPAN_DECLARE(void) t30_local_interrupt_request(t30_state_t *s, int state);
+
+/*! Allow remote interrupts of FAX exchange.
+    \brief Allow remote interrupts of FAX exchange.
+    \param s The T.30 context.
+    \param state TRUE to allow interruptd, else FALSE. */
+SPAN_DECLARE(void) t30_remote_interrupts_allowed(t30_state_t *s, int state);
 
 #if defined(__cplusplus)
 }

@@ -21,8 +21,6 @@
  * You should have received a copy of the GNU Lesser General Public
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
- *
- * $Id: complex.h,v 1.20 2009/02/21 05:39:08 steveu Exp $
  */
 
 /*! \file */
@@ -476,6 +474,12 @@ static __inline__ complexi32_t complex_conji32(const complexi32_t *x)
     z.re = x->re;
     z.im = -x->im;
     return z;
+}
+/*- End of function --------------------------------------------------------*/
+
+static __inline__ int32_t poweri16(const complexi16_t *x)
+{
+    return (int32_t) x->re*x->re + (int32_t) x->im*x->im;
 }
 /*- End of function --------------------------------------------------------*/
 

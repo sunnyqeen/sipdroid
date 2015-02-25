@@ -21,8 +21,6 @@
  * You should have received a copy of the GNU Lesser General Public
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
- *
- * $Id: adsi.h,v 1.40 2009/05/22 16:39:01 steveu Exp $
  */
 
 /*! \file */
@@ -391,6 +389,12 @@ typedef struct adsi_rx_state_s adsi_rx_state_t;
 extern "C"
 {
 #endif
+
+/*! Get the logging context associated with an ADSI receive context.
+    \brief Get the logging context associated with an ADSI receive context.
+    \param s The ADSI receive context.
+    \return A pointer to the logging context */
+SPAN_DECLARE(logging_state_t *) adsi_rx_get_logging_state(adsi_rx_state_t *s);
 
 /*! \brief Initialise an ADSI receive context.
     \param s The ADSI receive context.

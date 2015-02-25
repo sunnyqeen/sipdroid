@@ -21,8 +21,6 @@
  * You should have received a copy of the GNU Lesser General Public
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
- *
- * $Id: v27ter_rx.h,v 1.61 2009/07/09 13:52:09 steveu Exp $
  */
 
 /*! \file */
@@ -37,7 +35,7 @@ The V.27ter receiver implements the receive side of a V.27ter modem. This can op
 at data rates of 4800 and 2400 bits/s. The audio input is a stream of 16 bit samples,
 at 8000 samples/second. The transmit and receive side of V.27ter modems operate
 independantly. V.27ter is mostly used for FAX transmission, where it provides the
-standard 4800 bits/s rate (the 2400 bits/s mode is not used for FAX). 
+standard 4800 bits/s rate (the 2400 bits/s mode is not used for FAX).
 
 \section v27ter_rx_page_sec_2 How does it work?
 V.27ter defines two modes of operation. One uses 8-PSK at 1600 baud, giving 4800bps.
@@ -104,7 +102,7 @@ SPAN_DECLARE(void) v27ter_rx_set_put_bit(v27ter_rx_state_t *s, put_bit_func_t pu
     \param s The modem context.
     \param handler The callback routine used to report modem status changes.
     \param user_data An opaque pointer. */
-SPAN_DECLARE(void) v27ter_rx_set_modem_status_handler(v27ter_rx_state_t *s, modem_rx_status_func_t handler, void *user_data);
+SPAN_DECLARE(void) v27ter_rx_set_modem_status_handler(v27ter_rx_state_t *s, modem_status_func_t handler, void *user_data);
 
 /*! Process a block of received V.27ter modem audio samples.
     \brief Process a block of received V.27ter modem audio samples.
@@ -122,7 +120,7 @@ SPAN_DECLARE_NONSTD(int) v27ter_rx(v27ter_rx_state_t *s, const int16_t amp[], in
     \param len The number of samples to fake.
     \return The number of samples unprocessed.
 */
-SPAN_DECLARE(int) v27ter_rx_fillin(v27ter_rx_state_t *s, int len);
+SPAN_DECLARE_NONSTD(int) v27ter_rx_fillin(v27ter_rx_state_t *s, int len);
 
 /*! Get a snapshot of the current equalizer coefficients.
     \brief Get a snapshot of the current equalizer coefficients.

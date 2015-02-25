@@ -21,8 +21,6 @@
  * You should have received a copy of the GNU Lesser General Public
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
- *
- * $Id: hdlc.h,v 1.45 2009/06/02 16:03:56 steveu Exp $
  */
 
 /*! \file */
@@ -42,10 +40,10 @@ HDLC may not be a DSP function, but is needed to accompany several DSP component
 #if !defined(_SPANDSP_HDLC_H_)
 #define _SPANDSP_HDLC_H_
 
-/*! 
+/*!
     HDLC_MAXFRAME_LEN is the maximum length of a stuffed HDLC frame, excluding the CRC.
 */
-#define HDLC_MAXFRAME_LEN       400	
+#define HDLC_MAXFRAME_LEN       400
 
 typedef void (*hdlc_frame_handler_t)(void *user_data, const uint8_t *pkt, int len, int ok);
 typedef void (*hdlc_underflow_handler_t)(void *user_data);
@@ -83,7 +81,8 @@ extern "C"
 {
 #endif
 
-/*! \brief Initialise an HDLC receiver context.
+/*! Initialise an HDLC receiver context.
+    \brief Initialise an HDLC receiver context.
     \param s A pointer to an HDLC receiver context.
     \param crc32 TRUE to use ITU CRC32. FALSE to use ITU CRC16.
     \param report_bad_frames TRUE to request the reporting of bad frames.
@@ -101,6 +100,13 @@ SPAN_DECLARE(hdlc_rx_state_t *) hdlc_rx_init(hdlc_rx_state_t *s,
                                              hdlc_frame_handler_t handler,
                                              void *user_data);
 
+/*! Re-initialise an HDLC receiver context. This does not reset the usage statistics.
+    \brief Re-initialise an HDLC receiver context.
+    \param s A pointer to an HDLC receiver context.
+    \return 0 for success.
+*/
+SPAN_DECLARE(int) hdlc_rx_restart(hdlc_rx_state_t *s);
+
 /*! Change the put_bit function associated with an HDLC receiver context.
     \brief Change the put_bit function associated with an HDLC receiver context.
     \param s A pointer to an HDLC receiver context.
@@ -115,7 +121,7 @@ SPAN_DECLARE(void) hdlc_rx_set_frame_handler(hdlc_rx_state_t *s, hdlc_frame_hand
     \param handler The callback routine used to report status changes.
     \param user_data An opaque parameter for the callback routine.
 */
-SPAN_DECLARE(void) hdlc_rx_set_status_handler(hdlc_rx_state_t *s, modem_rx_status_func_t handler, void *user_data);
+SPAN_DECLARE(void) hdlc_rx_set_status_handler(hdlc_rx_state_t *s, modem_status_func_t handler, void *user_data);
 
 /*! Release an HDLC receiver context.
     \brief Release an HDLC receiver context.
@@ -169,7 +175,8 @@ SPAN_DECLARE_NONSTD(void) hdlc_rx_put_byte(hdlc_rx_state_t *s, int new_byte);
 */
 SPAN_DECLARE_NONSTD(void) hdlc_rx_put(hdlc_rx_state_t *s, const uint8_t buf[], int len);
 
-/*! \brief Initialise an HDLC transmitter context.
+/*! Initialise an HDLC transmitter context.
+    \brief Initialise an HDLC transmitter context.
     \param s A pointer to an HDLC transmitter context.
     \param crc32 TRUE to use ITU CRC32. FALSE to use ITU CRC16.
     \param inter_frame_flags The minimum flag octets to insert between frames (usually one).
@@ -185,8 +192,23 @@ SPAN_DECLARE(hdlc_tx_state_t *) hdlc_tx_init(hdlc_tx_state_t *s,
                                              hdlc_underflow_handler_t handler,
                                              void *user_data);
 
+/*! Re-initialise an HDLC transmitter context.
+    \brief Re-initialise an HDLC transmitter context.
+    \param s A pointer to an HDLC transmitter context.
+    \return 0 for success.
+*/
+SPAN_DECLARE(int) hdlc_tx_restart(hdlc_tx_state_t *s);
+
+/*! Release an HDLC transmitter context.
+    \brief Release an HDLC transmitter context.
+    \param s A pointer to an HDLC transmitter context.
+    \return 0 for OK */
 SPAN_DECLARE(int) hdlc_tx_release(hdlc_tx_state_t *s);
 
+/*! Free an HDLC transmitter context.
+    \brief Free an HDLC transmitter context.
+    \param s A pointer to an HDLC transmitter context.
+    \return 0 for OK */
 SPAN_DECLARE(int) hdlc_tx_free(hdlc_tx_state_t *s);
 
 /*! \brief Set the maximum frame length for an HDLC transmitter context.

@@ -21,8 +21,6 @@
  * You should have received a copy of the GNU Lesser General Public
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
- *
- * $Id: dtmf.h,v 1.32 2009/02/10 13:06:47 steveu Exp $
  */
 
 #if !defined(_SPANDSP_DTMF_H_)
@@ -172,6 +170,14 @@ SPAN_DECLARE(void) dtmf_rx_parms(dtmf_rx_state_t *s,
     \return The number of samples unprocessed. */
 SPAN_DECLARE(int) dtmf_rx(dtmf_rx_state_t *s, const int16_t amp[], int samples);
 
+/*! Fake processing of a missing block of received DTMF audio samples.
+    (e.g due to packet loss).
+    \brief Fake processing of a missing block of received DTMF audio samples.
+    \param s The DTMF receiver context.
+    \param len The number of samples to fake.
+    \return The number of samples unprocessed. */
+SPAN_DECLARE(int) dtmf_rx_fillin(dtmf_rx_state_t *s, int samples);
+
 /*! Get the status of DTMF detection during processing of the last audio
     chunk.
     \brief Get the status of DTMF detection during processing of the last
@@ -187,6 +193,11 @@ SPAN_DECLARE(int) dtmf_rx_status(dtmf_rx_state_t *s);
     \param max The maximum  number of digits to be returned,
     \return The number of digits actually returned. */
 SPAN_DECLARE(size_t) dtmf_rx_get(dtmf_rx_state_t *s, char *digits, int max);
+
+/*! \brief Get the logging context associated with a DTMF receiver context.
+    \param s The DTMF receiver context.
+    \return A pointer to the logging context */
+SPAN_DECLARE(logging_state_t *) dtmf_rx_get_logging_state(dtmf_rx_state_t *s);
 
 /*! \brief Initialise a DTMF receiver context.
     \param s The DTMF receiver context.

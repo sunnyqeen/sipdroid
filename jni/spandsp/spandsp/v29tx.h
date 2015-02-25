@@ -21,8 +21,6 @@
  * You should have received a copy of the GNU Lesser General Public
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
- *
- * $Id: v29tx.h,v 1.41 2009/07/09 13:52:09 steveu Exp $
  */
 
 /*! \file */
@@ -160,7 +158,7 @@ SPAN_DECLARE(void) v29_tx_set_get_bit(v29_tx_state_t *s, get_bit_func_t get_bit,
     \param s The modem context.
     \param handler The callback routine used to report modem status changes.
     \param user_data An opaque pointer. */
-SPAN_DECLARE(void) v29_tx_set_modem_status_handler(v29_tx_state_t *s, modem_tx_status_func_t handler, void *user_data);
+SPAN_DECLARE(void) v29_tx_set_modem_status_handler(v29_tx_state_t *s, modem_status_func_t handler, void *user_data);
 
 /*! Generate a block of V.29 modem audio samples.
     \brief Generate a block of V.29 modem audio samples.

@@ -27,7 +27,9 @@
 #include <jni.h>
 #include <android/log.h> 
 
-#include "spandsp.h"
+#include "myinttypes.h"
+#include "spandsp/telephony.h"
+#include "spandsp/gsm0610.h"
 
 /* Define codec specific settings */
 #define BLOCK_LEN       160
@@ -153,7 +155,7 @@ JNIEXPORT void JNICALL Java_org_sipdroid_codecs_GSM_close
 	if (--codec_open != 0)
 		return;
 		
-	gsm0610_release(gsm0610_enc_state);
-	gsm0610_release(gsm0610_dec_state);
+	gsm0610_free(gsm0610_enc_state);
+	gsm0610_free(gsm0610_dec_state);
 	
 }

@@ -21,8 +21,6 @@
  * You should have received a copy of the GNU Lesser General Public
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
- *
- * $Id: bit_operations.h,v 1.27 2009/07/10 13:15:56 steveu Exp $
  */
 
 /*! \file */
@@ -227,7 +225,7 @@ SPAN_DECLARE(uint32_t) bit_reverse_4bytes(uint32_t data);
 SPAN_DECLARE(uint64_t) bit_reverse_8bytes(uint64_t data);
 #endif
 
-/*! \brief Bit reverse each bytes in a buffer.
+/*! \brief Bit reverse each byte in a buffer.
     \param to The buffer to place the reversed data in.
     \param from The buffer containing the data to be reversed.
     \param len The length of the data in the buffer. */

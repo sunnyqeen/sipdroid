@@ -21,8 +21,6 @@
  * You should have received a copy of the GNU Lesser General Public
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
- *
- * $Id: silence_gen.h,v 1.19 2009/09/04 14:38:47 steveu Exp $
  */
 
 #if !defined(_SPANDSP_SILENCE_GEN_H_)
@@ -86,7 +84,7 @@ SPAN_DECLARE(int) silence_gen_generated(silence_gen_state_t *s);
     \param s The silence generator context.
     \param handler The callback routine used to report status changes.
     \param user_data An opaque pointer. */
-SPAN_DECLARE(void) silence_gen_status_handler(silence_gen_state_t *s, modem_tx_status_func_t handler, void *user_data);
+SPAN_DECLARE(void) silence_gen_status_handler(silence_gen_state_t *s, modem_status_func_t handler, void *user_data);
 
 /*! Initialise a timed silence generator context.
     \brief Initialise a timed silence generator context.

@@ -21,8 +21,6 @@
  * You should have received a copy of the GNU Lesser General Public
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
- *
- * $Id: t38_core.h,v 1.39 2009/07/14 13:54:22 steveu Exp $
  */
 
 /*! \file */
@@ -157,7 +155,8 @@ enum t38_transport_types_e
 {
     T38_TRANSPORT_UDPTL = 0,
     T38_TRANSPORT_RTP,
-    T38_TRANSPORT_TCP
+    T38_TRANSPORT_TCP,
+    T38_TRANSPORT_TCP_TPKT
 };
 
 /*! T.38 TCF management types */
@@ -253,9 +252,15 @@ SPAN_DECLARE(int) t38_core_send_indicator(t38_core_state_t *s, int indicator);
 
 /*! \brief Find the delay to allow for HDLC flags after sending an indicator
     \param s The T.38 context.
-    \param indicator The indicator to send.
+    \param indicator The indicator to check.
     \return The delay to allow for initial HDLC flags after this indicator is sent. */
 SPAN_DECLARE(int) t38_core_send_flags_delay(t38_core_state_t *s, int indicator);
+
+/*! \brief Find the delay to allow for modem training after sending an indicator
+    \param s The T.38 context.
+    \param indicator The indicator to check.
+    \return The delay to allow for modem training after this indicator is sent. */
+SPAN_DECLARE(int) t38_core_send_training_delay(t38_core_state_t *s, int indicator);
 
 /*! \brief Send a data packet
     \param s The T.38 context.
@@ -264,7 +269,7 @@ SPAN_DECLARE(int) t38_core_send_flags_delay(t38_core_state_t *s, int indicator);
     \param field The message data content for the packet.
     \param field_len The length of the message data, in bytes.
     \param category The category of the packet being sent. This should be one of the values defined for t38_packet_categories_e.
-    \return ??? */
+    \return 0 for OK, else -1 */
 SPAN_DECLARE(int) t38_core_send_data(t38_core_state_t *s, int data_type, int field_type, const uint8_t field[], int field_len, int category);
 
 /*! \brief Send a data packet
@@ -273,16 +278,25 @@ SPAN_DECLARE(int) t38_core_send_data(t38_core_state_t *s, int data_type, int fie
     \param field The list of fields.
     \param fields The number of fields in the list.
     \param category The category of the packet being sent. This should be one of the values defined for t38_packet_categories_e.
-    \return ??? */
+    \return 0 for OK, else -1 */
 SPAN_DECLARE(int) t38_core_send_data_multi_field(t38_core_state_t *s, int data_type, const t38_data_field_t field[], int fields, int category);
 
-/*! \brief Process a received T.38 IFP packet.
+/*! \brief Process a received T.38 IFP packet from an unreliable packet stream (e.g. UDPTL or RTP). This processing includes
+           packet sequence number checking, missing packet recovery, and skipping repeat packets.
     \param s The T.38 context.
     \param buf The packet contents.
     \param len The length of the packet contents.
     \param seq_no The packet sequence number.
     \return 0 for OK, else -1. */
-SPAN_DECLARE(int) t38_core_rx_ifp_packet(t38_core_state_t *s, const uint8_t *buf, int len, uint16_t seq_no);
+SPAN_DECLARE_NONSTD(int) t38_core_rx_ifp_packet(t38_core_state_t *s, const uint8_t *buf, int len, uint16_t seq_no);
+
+/*! \brief Process a received T.38 IFP packet from a reliable stream (e.g. TCP).
+    \param s The T.38 context.
+    \param buf The packet contents.
+    \param len The length of the packet contents.
+    \param seq_no The packet sequence number, used for logging purposes.
+    \return The length of the packet processed, or -1 if there is an error in the packet, or too few bytes of data to complete it. */
+SPAN_DECLARE_NONSTD(int) t38_core_rx_ifp_stream(t38_core_state_t *s, const uint8_t *buf, int len, uint16_t log_seq_no);
 
 /*! Set the method to be used for data rate management, as per the T.38 spec.
     \param s The T.38 context.
@@ -335,6 +349,8 @@ SPAN_DECLARE(void) t38_set_max_datagram_size(t38_core_state_t *s, int max_datagr
                    information may be encoded in it, such as the redundancy depth for the particular packet category. */
 SPAN_DECLARE(void) t38_set_redundancy_control(t38_core_state_t *s, int category, int setting);
 
+SPAN_DECLARE(void) t38_set_pace_transmission(t38_core_state_t *s, int pace_transmission);
+
 SPAN_DECLARE(void) t38_set_fastest_image_data_rate(t38_core_state_t *s, int max_rate);
 
 SPAN_DECLARE(int) t38_get_fastest_image_data_rate(t38_core_state_t *s);
@@ -364,6 +380,12 @@ SPAN_DECLARE(void) t38_set_tep_handling(t38_core_state_t *s, int allow_for_tep);
     \return A pointer to the logging context, or NULL.
 */
 SPAN_DECLARE(logging_state_t *) t38_core_get_logging_state(t38_core_state_t *s);
+
+/*! Restart a T.38 core context.
+    \brief Restart a T.38 core context.
+    \param s The T.38 context.
+    \return 0 for OK, else -1. */
+SPAN_DECLARE(int) t38_core_restart(t38_core_state_t *s);
 
 /*! Initialise a T.38 core context.
     \brief Initialise a T.38 core context.

@@ -46,6 +46,9 @@ typedef uint8_t       uint_fast8_t;
 #define  INT16_MAX   0x7FFF 
 #define  INT16_MIN   (-INT16_MAX - 1) 
 
+#define  UINT8_MAX   0xFFu
+#define  UINT16_MAX   0xFFFFu
+
 //#if !defined(INFINITY)
 //#define INFINITY 0x7FFFFFFF
 //#endif

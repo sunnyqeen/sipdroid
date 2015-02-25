@@ -21,8 +21,6 @@
  * You should have received a copy of the GNU Lesser General Public
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
- *
- * $Id: version.h.in,v 1.3.4.1 2009/12/19 09:47:56 steveu Exp $
  */
 
 #if !defined(_SPANDSP_VERSION_H_)
@@ -30,9 +28,9 @@
 
 /* The date and time of the version are in UTC form. */
 
-#define SPANDSP_RELEASE_DATE            20091228
-#define SPANDSP_RELEASE_TIME            123351
-#define SPANDSP_RELEASE_DATETIME_STRING "20091228 123351"
+#define SPANDSP_RELEASE_DATE            20110122
+#define SPANDSP_RELEASE_TIME            075024
+#define SPANDSP_RELEASE_DATETIME_STRING "20110122 075024"
 
 #endif
 /*- End of file ------------------------------------------------------------*/

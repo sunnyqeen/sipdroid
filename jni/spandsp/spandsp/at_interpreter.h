@@ -21,8 +21,6 @@
  * You should have received a copy of the GNU Lesser General Public
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
- *
- * $Id: at_interpreter.h,v 1.23 2009/02/10 13:06:47 steveu Exp $
  */
 
 /*! \file */
@@ -37,12 +35,6 @@ modem control commands.
 
 \section at_page_sec_2 How does it work?
 */
-
-typedef struct at_state_s at_state_t;
-
-typedef int (at_modem_control_handler_t)(at_state_t *s, void *user_data, int op, const char *num);
-typedef int (at_tx_handler_t)(at_state_t *s, void *user_data, const uint8_t *buf, size_t len);
-typedef int (at_class1_handler_t)(at_state_t *s, void *user_data, int direction, int operation, int val);
 
 enum at_rx_mode_e
 {
@@ -111,6 +103,12 @@ enum
     AT_RESPONSE_CODE_FCERROR,
     AT_RESPONSE_CODE_FRH3
 };
+
+typedef struct at_state_s at_state_t;
+
+typedef int (at_modem_control_handler_t)(at_state_t *s, void *user_data, int op, const char *num);
+typedef int (at_tx_handler_t)(at_state_t *s, void *user_data, const uint8_t *buf, size_t len);
+typedef int (at_class1_handler_t)(at_state_t *s, void *user_data, int direction, int operation, int val);
 
 /*!
     AT profile.

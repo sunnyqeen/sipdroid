@@ -27,7 +27,9 @@
 #include <jni.h>
 #include <android/log.h> 
 
-#include "spandsp.h"
+#include "myinttypes.h"
+#include "spandsp/telephony.h"
+#include "spandsp/g722.h"
 #include "spandsp/private/g722.h"
 
 /* Define codec specific settings */

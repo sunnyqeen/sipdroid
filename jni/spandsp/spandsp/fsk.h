@@ -21,8 +21,6 @@
  * You should have received a copy of the GNU Lesser General Public
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
- *
- * $Id: fsk.h,v 1.41 2009/11/02 13:25:20 steveu Exp $
  */
 
 /*! \file */
@@ -112,7 +110,8 @@ enum
     FSK_BELL103CH2,
     FSK_BELL202,
     FSK_WEITBRECHT,     /* 45.45 baud version, used for TDD (Telecom Device for the Deaf) */
-    FSK_WEITBRECHT50    /* 50 baud version, used for TDD (Telecom Device for the Deaf) */
+    FSK_WEITBRECHT50,   /* 50 baud version, used for TDD (Telecom Device for the Deaf) */
+    FSK_V21CH1_110      /* 110 bps version of V.21 channel 1, as used by V.18 */
 };
 
 enum
@@ -121,7 +120,8 @@ enum
     FSK_FRAME_MODE_SYNC = 1,
     FSK_FRAME_MODE_5N1_FRAMES = 7,      /* 5 bits of data + start bit + stop bit */
     FSK_FRAME_MODE_7N1_FRAMES = 9,      /* 7 bits of data + start bit + stop bit */
-    FSK_FRAME_MODE_8N1_FRAMES = 10      /* 8 bits of data + start bit + stop bit */
+    FSK_FRAME_MODE_7E1_FRAMES = 10,     /* 7 bits of data + even parity + start bit + stop bit */
+    FSK_FRAME_MODE_7E2_FRAMES = 11      /* 7 bits of data + even parity + start bit + 2 stop bits */
 };
 
 SPAN_DECLARE_DATA extern const fsk_spec_t preset_fsk_specs[];
@@ -177,7 +177,7 @@ SPAN_DECLARE(void) fsk_tx_set_get_bit(fsk_tx_state_t *s, get_bit_func_t get_bit,
     \param s The modem context.
     \param handler The callback routine used to report modem status changes.
     \param user_data An opaque pointer. */
-SPAN_DECLARE(void) fsk_tx_set_modem_status_handler(fsk_tx_state_t *s, modem_tx_status_func_t handler, void *user_data);
+SPAN_DECLARE(void) fsk_tx_set_modem_status_handler(fsk_tx_state_t *s, modem_status_func_t handler, void *user_data);
 
 /*! Generate a block of FSK modem audio samples.
     \brief Generate a block of FSK modem audio samples.
@@ -236,7 +236,7 @@ SPAN_DECLARE_NONSTD(int) fsk_rx(fsk_rx_state_t *s, const int16_t *amp, int len);
     \param len The number of samples to fake.
     \return The number of samples unprocessed.
 */
-SPAN_DECLARE(int) fsk_rx_fillin(fsk_rx_state_t *s, int len);
+SPAN_DECLARE_NONSTD(int) fsk_rx_fillin(fsk_rx_state_t *s, int len);
 
 SPAN_DECLARE(void) fsk_rx_set_put_bit(fsk_rx_state_t *s, put_bit_func_t put_bit, void *user_data);
 
@@ -245,7 +245,7 @@ SPAN_DECLARE(void) fsk_rx_set_put_bit(fsk_rx_state_t *s, put_bit_func_t put_bit,
     \param s The modem context.
     \param handler The callback routine used to report modem status changes.
     \param user_data An opaque pointer. */
-SPAN_DECLARE(void) fsk_rx_set_modem_status_handler(fsk_rx_state_t *s, modem_rx_status_func_t handler, void *user_data);
+SPAN_DECLARE(void) fsk_rx_set_modem_status_handler(fsk_rx_state_t *s, modem_status_func_t handler, void *user_data);
 
 #if defined(__cplusplus)
 }
