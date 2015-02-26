@@ -54,6 +54,7 @@ public class Codecs {
 //			add(new SILK8());
 			add(new alaw());
 			add(new ulaw());
+			add(new G726());
 			add(new G729());
 			add(new Speex());
 			add(new GSM());

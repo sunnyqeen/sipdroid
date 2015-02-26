@@ -279,6 +279,18 @@ include $(BUILD_SHARED_LIBRARY)
 
 include $(CLEAR_VARS)
 SPANDSP     := spandsp
+LOCAL_MODULE    := g726_jni
+LOCAL_SRC_FILES := g726_jni.cpp \
+	$(SPANDSP)/g726.c \
+	$(SPANDSP)/bitstream.c
+#LOCAL_ARM_MODE := arm
+LOCAL_LDLIBS := -L$(SYSROOT)/usr/lib -llog
+LOCAL_C_INCLUDES += $(LOCAL_PATH)/$(SPANDSP)/spandsp $(LOCAL_PATH)/$(SPANDSP)
+LOCAL_CFLAGS = -O3 -DHAVE_CONFIG_H
+include $(BUILD_SHARED_LIBRARY)
+
+include $(CLEAR_VARS)
+SPANDSP     := spandsp
 LOCAL_MODULE    := gsm_jni
 LOCAL_SRC_FILES := gsm_jni.cpp \
 	$(SPANDSP)/gsm0610_decode.c \

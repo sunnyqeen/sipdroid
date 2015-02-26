@@ -8,6 +8,7 @@ APP_MODULES	 += bv16_jni
 #APP_MODULES	 += silk16_jni
 #APP_MODULES	 += silk24_jni
 APP_MODULES	 += g722_jni
+APP_MODULES	 += g726_jni
 APP_MODULES	 += gsm_jni
 APP_MODULES	 += g729_jni
 
