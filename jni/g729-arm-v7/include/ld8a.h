@@ -489,6 +489,7 @@ void bits2prm_ld8k(UWord8 *bits,  Word16  prm[]);
  *--------------------------------------------------------------------------*/
 //#if defined(__EQUIVALENT_C__) && (__EQUIVALENT_C__!=0)
 #if 1
+#include <string.h>
 #include <strings.h>
 #define Copy(x,y,L)    memcpy((y), (x), (L)*sizeof(Word16))
 #define Set_zero(x, L) bzero((x), (L)*sizeof(Word16))

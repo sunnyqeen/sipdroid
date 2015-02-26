@@ -344,7 +344,7 @@ LOCAL_SRC_FILES := 	$(G729_PATH)/src/acelp_ca.c \
 					$(G729_PATH)/src/g729a_encoder.c
 LOCAL_SRC_FILES +=  g729_jni.cpp
 #LOCAL_ARM_MODE := arm
-LOCAL_CFLAGS := -O3 -DARCH_ARMV6
+LOCAL_CFLAGS := -O3 -DARCH_ARMV6=1 -fno-builtin-round
 else
 G729_PATH := $(LOCAL_PATH)/g729
 LOCAL_C_INCLUDES += $(G729_PATH)/include

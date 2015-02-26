@@ -377,6 +377,7 @@ Word16 extract_h(Word32 L_var1)
  |___________________________________________________________________________|
 */
 
+/*
 Word16 round(Word32 L_var1)
   {
    Word16 var_out;
@@ -386,7 +387,7 @@ Word16 round(Word32 L_var1)
    var_out = extract_h(L_arrondi);
    return(var_out);
   }
-
+*/
 
 
 
