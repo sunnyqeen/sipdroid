@@ -55,6 +55,7 @@ public class AccountSettings extends PreferenceActivity implements OnSharedPrefe
 	private SharedPreferences settings = null;
 
 	private boolean needRestartEngine = false;
+	private int siplines = SipdroidEngine.LINES;
 
 	// IDs of the menu items
 	private static final int MENU_PLUS = 0;
@@ -84,14 +85,14 @@ public class AccountSettings extends PreferenceActivity implements OnSharedPrefe
 		for (int i = 0; i < MAX_LINES; i++) {
 			String j = (i!=0?""+i:"");
 			PreferenceScreen account_i = (PreferenceScreen)getPreferenceScreen().findPreference(Settings.PREF_ACCOUNT+j);
-			account_i.setEnabled(i < SipdroidEngine.LINES ? true:false);
+			account_i.setEnabled(i < siplines ? true:false);
 		}
 	}
 
 	private void setDefaultValues(int lines) {
 		if (settings.getInt(PREF_LINES, -1) == -1) {
 			Editor edit = settings.edit();
-			edit.putInt(PREF_LINES, SipdroidEngine.LINES);
+			edit.putInt(PREF_LINES, siplines);
 			edit.commit();
 		}
 		
@@ -126,10 +127,10 @@ public class AccountSettings extends PreferenceActivity implements OnSharedPrefe
     	switch (item.getItemId()) {
             case MENU_PLUS:
 			{
-				if(SipdroidEngine.LINES >= MAX_LINES) return false;
+				if(siplines >= MAX_LINES) return false;
 
 				Editor edit = settings.edit();
-				edit.putInt(PREF_LINES, SipdroidEngine.LINES+1);
+				edit.putInt(PREF_LINES, ++siplines);
 				edit.commit();
 							
 				reload();
@@ -138,9 +139,9 @@ public class AccountSettings extends PreferenceActivity implements OnSharedPrefe
                 
             case MENU_MINUS:
 			{
-				if(SipdroidEngine.LINES < 2) return false;
+				if(siplines < 2) return false;
 				Editor edit = settings.edit();
-				edit.putInt(PREF_LINES, SipdroidEngine.LINES-1);
+				edit.putInt(PREF_LINES, --siplines);
 				edit.commit();
 						
 				reload();
@@ -191,7 +192,7 @@ public class AccountSettings extends PreferenceActivity implements OnSharedPrefe
 			return;
 		} else if (key.startsWith(Settings.PREF_SERVER) || key.startsWith(Settings.PREF_PROTOCOL)) {
     		Editor edit = sharedPreferences.edit();
-    		for (int i = 0; i < SipdroidEngine.LINES; i++) {
+    		for (int i = 0; i < siplines; i++) {
     			edit.putString(Settings.PREF_DNS+i, Settings.DEFAULT_DNS);
     			String j = (i!=0?""+i:"");
     			if (key.equals(Settings.PREF_SERVER+j)) {
@@ -228,7 +229,7 @@ public class AccountSettings extends PreferenceActivity implements OnSharedPrefe
 		} else if (key.equals(PREF_LINES)) {
 			needRestartEngine = true;
 		}
-		updateSummaries(SipdroidEngine.LINES);
+		updateSummaries(siplines);
     }
 
 	public void updateSummaries(int lines) {	
