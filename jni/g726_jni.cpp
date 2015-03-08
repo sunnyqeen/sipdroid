@@ -35,7 +35,7 @@
 #include "spandsp/private/g726.h"
 
 /* Define codec specific settings */
-#define G726_SAMPLE_RATE    16000
+#define G726_SAMPLE_RATE    8000
 #define BLOCK_LEN           320
 
 #define LOG_TAG "g726" // text for log tag 
