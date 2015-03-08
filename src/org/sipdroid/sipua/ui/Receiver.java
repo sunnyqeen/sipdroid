@@ -331,9 +331,10 @@ import org.zoolu.sip.provider.SipProvider;
 				        	notification.ledOnMS = 125;
 				        	notification.ledOffMS = 2875;
 				        }
+			        	notification.flags |= Notification.FLAG_ONGOING_EVENT;
 		        		break;
 		        	}			
-		        	notification.flags |= Notification.FLAG_ONGOING_EVENT;
+
 			        RemoteViews contentView = new RemoteViews(mContext.getPackageName(),
 	                        R.layout.ongoing_call_notification);
 			        contentView.setImageViewResource(R.id.icon, notification.icon);
