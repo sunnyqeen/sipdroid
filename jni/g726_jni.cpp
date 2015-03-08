@@ -36,7 +36,7 @@
 
 /* Define codec specific settings */
 #define G726_SAMPLE_RATE    8000
-#define BLOCK_LEN           320
+#define BLOCK_LEN           160
 
 #define LOG_TAG "g726" // text for log tag 
 
@@ -53,7 +53,7 @@ const char *kInterfacePath = "org/sipdroid/pjlib/g726";
 g726_state_s enc_state;
 g726_state_s dec_state;
 
-//bit_rate=64000;			// 16000, 24000, 32000 or 40000
+//bit_rate=32000;			// 16000, 24000, 32000 or 40000
 extern "C"
 JNIEXPORT jint JNICALL Java_org_sipdroid_codecs_G726_open
   (JNIEnv *env, jobject obj, jint bitrate) {
