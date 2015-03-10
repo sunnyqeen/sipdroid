@@ -354,5 +354,15 @@ LOCAL_SRC_FILES += g729_jni.cpp
 #LOCAL_ARM_MODE := arm
 LOCAL_CFLAGS := -O3
 endif
-LOCAL_STATIC_LIBRARIES += libgcc
+include $(BUILD_SHARED_LIBRARY)
+
+### ilbc codec ###
+include $(CLEAR_VARS)
+LOCAL_MODULE := ilbc_jni
+ILBC_PATH := $(LOCAL_PATH)/ilbc
+LOCAL_C_INCLUDES += $(ILBC_PATH)
+ILBC_FILES := $(wildcard $(ILBC_PATH)/*.c)
+LOCAL_SRC_FILES += $(ILBC_FILES:$(LOCAL_PATH)/%=%) 
+LOCAL_SRC_FILES += ilbc_jni.cpp
+LOCAL_CFLAGS := -O3
 include $(BUILD_SHARED_LIBRARY)

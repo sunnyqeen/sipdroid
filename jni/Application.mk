@@ -11,6 +11,7 @@ APP_MODULES	 += g722_jni
 APP_MODULES	 += g726_jni
 APP_MODULES	 += gsm_jni
 APP_MODULES	 += g729_jni
+APP_MODULES	 += ilbc_jni
 
 APP_OPTIM        := release 
 APP_CFLAGS       += -O3

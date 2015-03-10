@@ -56,6 +56,7 @@ public class Codecs {
 			add(new ulaw());
 			add(new G726());
 			add(new G729());
+			add(new iLBC());
 			add(new Speex());
 			add(new GSM());
 			add(new BV16());
