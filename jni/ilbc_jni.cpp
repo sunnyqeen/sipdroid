@@ -77,7 +77,6 @@ JNIEXPORT jint JNICALL Java_org_sipdroid_codecs_iLBC_decode
 
 	jshort post_amp[BLOCK_LEN];
 	jbyte ilbc_data[ILBC_NO_OF_BYTES_MAX];
-	short speechType = 0;
 	int len;
 
 	if (!codec_open)
