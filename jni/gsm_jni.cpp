@@ -100,7 +100,7 @@ JNIEXPORT jint JNICALL Java_org_sipdroid_codecs_GSM_encode
 			
 		env->GetShortArrayRegion(lin, offset + i,frsz, pre_amp);
 
-		ret=gsm0610_encode(gsm0610_enc_state, (uint8_t *) gsm0610_data, pre_amp, size);
+		ret=gsm0610_encode(gsm0610_enc_state, (uint8_t *) gsm0610_data, pre_amp, frsz);
 
 #ifdef DEBUG_GSM
 			__android_log_print(ANDROID_LOG_DEBUG, LOG_TAG, 
